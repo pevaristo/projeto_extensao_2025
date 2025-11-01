@@ -1,0 +1,48 @@
+services:
+  app:
+    build: .
+    image: avaliacao-sistema:latest
+    container_name: avaliacao-sistema_app
+    ports:
+      - "8082:8080"
+    #environment:
+      # TODO: Incluir as variáveis depois de refatorar o código / Isso possibilitará usar apenas o estágio 0 do Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mariadb:10.11.2 
+    container_name: avaliacao-sistema_db
+    healthcheck:
+      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost", "-u", "unifae_med_app", "-punifae_med_app"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    environment:
+      MARIADB_DATABASE: unifae_med_app
+      MARIADB_USER: unifae_med_app
+      MARIADB_PASSWORD: unifae_med_app
+      MARIADB_ROOT_PASSWORD: unifae_med_app
+    ports:
+      - "3307:3306"
+    # Qualquer arquivo *.sql neste diretório /docker-entrypoint-initdb.d/ será executado na primeira inicialização.
+    # Lembre-se de mudar o caminho do arquivo sql
+    volumes:
+      - ./01-script_estrutura_dados_banco_unifae.sql:/docker-entrypoint-initdb.d/01-script_estrutura_dados_banco_unifae.sql
+      - mariadb_data:/var/lib/mysql 
+  
+  adminer:
+    image: adminer:latest
+    container_name: avaliacao-sistema_adminer
+    restart: always
+    ports:
+      - 8081:8080
+    environment:
+      ADMINER_DEFAULT_SERVER: db
+    depends_on:
+      - db
+
+volumes:
+  mariadb_data:
