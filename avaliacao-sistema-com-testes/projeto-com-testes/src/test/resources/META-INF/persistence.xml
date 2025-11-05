@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PERSISTENCE.XML PARA TESTES
+    ===========================
+    
+    Configuração JPA para ambiente de testes usando banco H2 em memória.
+    Este arquivo sobrescreve o persistence.xml de produção durante a execução dos testes.
+-->
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_1.xsd"
+             version="3.1">
+
+    <persistence-unit name="unifae-med-pu" transaction-type="RESOURCE_LOCAL">
+        
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        
+        <class>com.unifae.med.entity.Usuario</class>
+        <class>com.unifae.med.entity.Questionario</class>
+        <class>com.unifae.med.entity.CompetenciaQuestionario</class>
+        <class>com.unifae.med.entity.AvaliacaoPreenchida</class>
+        <class>com.unifae.med.entity.RespostaItemAvaliacao</class>
+        <class>com.unifae.med.entity.Permissao</class>
+        <class>com.unifae.med.entity.Turma</class>
+        <class>com.unifae.med.entity.Disciplina</class>
+        <class>com.unifae.med.entity.LocalEvento</class>
+        <class>com.unifae.med.entity.EventoAgenda</class>
+        <class>com.unifae.med.entity.DisciplinaTurma</class>
+        <class>com.unifae.med.entity.Nota</class>
+        
+        <properties>
+            <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=MySQL;LOCK_TIMEOUT=10000"/>
+            <property name="jakarta.persistence.jdbc.user" value="sa"/>
+            <property name="jakarta.persistence.jdbc.password" value=""/>
+            
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.format_sql" value="true"/>
+            
+            <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
+                        
+            <property name="hibernate.connection.pool_size" value="5"/>
+        </properties>
+    </persistence-unit>
+</persistence>

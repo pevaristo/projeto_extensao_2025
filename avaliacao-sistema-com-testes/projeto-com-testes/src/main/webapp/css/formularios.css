@@ -1,0 +1,1007 @@
+/*
+    FORMULARIOS.CSS - ESTILOS PARA SISTEMA DE AVALIAÇÃO UNIFAE
+    ===========================================================
+    
+    Este arquivo CSS define todos os estilos visuais do Sistema de Avaliação UNIFAE.
+    Reproduz fielmente o layout dos formulários em PDF originais, mantendo
+    consistência visual e usabilidade em diferentes dispositivos.
+    
+    RESPONSABILIDADES:
+    - Estilizar formulários de avaliação (Mini CEX, Avaliação 360°)
+    - Definir layout responsivo para desktop e mobile
+    - Configurar estilos de impressão
+    - Padronizar componentes visuais (botões, campos, tabelas)
+    - Implementar interatividade visual (hover, focus)
+    
+    ESTRUTURA DO ARQUIVO:
+    1. Reset CSS e estilos globais
+    2. Estilos para formulários Mini CEX
+    3. Estilos para formulários Avaliação 360°
+    4. Componentes reutilizáveis (botões, campos)
+    5. Menu da página inicial
+    6. Media queries (responsividade e impressão)
+    
+    RELACIONAMENTO COM OUTROS ARQUIVOS:
+    - index.jsp: Importa este CSS para estilização
+    - Formulários JSP: Usam classes CSS definidas aqui
+    - Servlets: Geram HTML que usa estas classes
+    - Navegadores: Interpretam estes estilos para renderização
+    
+    PADRÕES UTILIZADOS:
+    - BEM-like naming: Classes descritivas e organizadas
+    - Mobile-first: Responsividade progressiva
+    - Print-friendly: Otimizado para impressão
+    - Semantic CSS: Classes baseadas em função, não aparência
+    
+    COMPATIBILIDADE:
+    - Navegadores modernos (Chrome, Firefox, Safari, Edge)
+    - Dispositivos móveis (tablets, smartphones)
+    - Impressoras (layout otimizado para papel)
+*/
+
+/* ===================================================
+   RESET CSS E CONFIGURAÇÕES GLOBAIS
+   =================================================== */
+
+/*
+    RESET CSS BÁSICO
+    ================
+    Remove margens e paddings padrão dos navegadores.
+    Define box-sizing para facilitar cálculos de layout.
+*/
+* {
+    margin: 0;                    /* Remove margem padrão */
+    padding: 0;                   /* Remove padding padrão */
+    box-sizing: border-box;       /* Inclui border e padding no width/height */
+}
+
+/*
+    ESTILOS GLOBAIS DO BODY
+    =======================
+    Define aparência base para toda a aplicação.
+    Fonte, tamanho, cor e espaçamento padrão.
+*/
+body {
+    font-family: Arial, sans-serif;  /* Fonte padrão do sistema */
+    font-size: 12px;                 /* Tamanho base pequeno (formulários) */
+    line-height: 1.4;                /* Espaçamento entre linhas */
+    color: #000;                     /* Texto preto */
+    background-color: #fff;          /* Fundo branco */
+    padding: 20px;                   /* Espaçamento externo */
+}
+
+/* ===================================================
+   ESTILOS PARA FORMULÁRIOS MINI CEX
+   =================================================== */
+
+/*
+    CONTAINER PRINCIPAL DOS FORMULÁRIOS
+    ===================================
+    Layout centralizado com bordas que reproduzem aparência de formulário impresso.
+*/
+.formulario-container {
+    max-width: 800px;               /* Largura máxima para legibilidade */
+    margin: 0 auto;                 /* Centralização horizontal */
+    background: white;              /* Fundo branco */
+    border: 2px solid #000;         /* Borda preta forte */
+    padding: 15px;                  /* Espaçamento interno */
+}
+
+/*
+    CABEÇALHO DOS FORMULÁRIOS
+    =========================
+    Seção superior com título e informações básicas.
+*/
+.formulario-header {
+    text-align: center;             /* Centralização do texto */
+    margin-bottom: 20px;            /* Espaço abaixo */
+    border-bottom: 2px solid #000;  /* Linha separadora */
+    padding-bottom: 10px;           /* Espaço antes da linha */
+}
+
+/*
+    TÍTULO PRINCIPAL DO FORMULÁRIO
+    ==============================
+    Texto grande e destacado para identificação do tipo de avaliação.
+*/
+.formulario-titulo {
+    font-size: 16px;                /* Tamanho maior que o padrão */
+    font-weight: bold;              /* Texto em negrito */
+    text-transform: uppercase;      /* Letras maiúsculas */
+    margin-bottom: 5px;             /* Espaço abaixo */
+}
+
+/*
+    SUBTÍTULO DO FORMULÁRIO
+    =======================
+    Informações complementares sobre o formulário.
+*/
+.formulario-subtitulo {
+    font-size: 14px;                /* Tamanho médio */
+    font-weight: bold;              /* Texto em negrito */
+    margin-bottom: 10px;            /* Espaço abaixo */
+}
+
+/*
+    SEÇÃO DE DADOS BÁSICOS
+    ======================
+    Área para informações do estudante, data, local, etc.
+    Layout em tabela para alinhamento preciso.
+*/
+.dados-basicos {
+    margin-bottom: 20px;            /* Espaço abaixo */
+    border: 1px solid #000;         /* Borda delimitadora */
+    padding: 10px;                  /* Espaçamento interno */
+}
+
+/* Tabela dentro da seção de dados básicos */
+.dados-basicos table {
+    width: 100%;                    /* Largura total */
+    border-collapse: collapse;      /* Remove espaços entre bordas */
+}
+
+/* Células da tabela de dados básicos */
+.dados-basicos td {
+    padding: 5px;                   /* Espaçamento interno */
+    border: none;                   /* Remove bordas das células */
+    vertical-align: middle;         /* Alinhamento vertical central */
+}
+
+/* Labels dentro dos dados básicos */
+.dados-basicos label {
+    font-weight: bold;              /* Texto em negrito */
+    margin-right: 5px;              /* Espaço à direita */
+}
+
+/* Campos de entrada nos dados básicos */
+.dados-basicos input[type="text"],
+.dados-basicos input[type="date"],
+.dados-basicos input[type="time"],
+.dados-basicos select {
+    border: none;                   /* Remove borda padrão */
+    border-bottom: 1px solid #000;  /* Linha inferior apenas */
+    background: transparent;        /* Fundo transparente */
+    padding: 2px 5px;               /* Espaçamento interno mínimo */
+    font-size: 12px;                /* Tamanho da fonte */
+    min-width: 100px;               /* Largura mínima */
+}
+
+/* ===================================================
+   ESTILOS PARA COMPETÊNCIAS (MINI CEX)
+   =================================================== */
+
+/*
+    CONTAINER DAS COMPETÊNCIAS
+    ==========================
+    Agrupa todas as competências avaliadas no formulário.
+*/
+.competencias-container {
+    margin-bottom: 20px;            /* Espaço abaixo */
+}
+
+/*
+    ITEM INDIVIDUAL DE COMPETÊNCIA
+    ==============================
+    Cada competência é um bloco separado com layout específico.
+*/
+.competencia-item {
+    border: 1px solid #000;         /* Borda delimitadora */
+    margin-bottom: 15px;            /* Espaço entre competências */
+    background: #f9f9f9;            /* Fundo levemente cinza */
+}
+
+/*
+    CABEÇALHO DA COMPETÊNCIA
+    ========================
+    Título da competência sendo avaliada.
+*/
+.competencia-header {
+    background: #e0e0e0;            /* Fundo cinza */
+    padding: 8px;                   /* Espaçamento interno */
+    text-align: center;             /* Centralização */
+    font-weight: bold;              /* Texto em negrito */
+    border-bottom: 1px solid #000;  /* Linha separadora */
+}
+
+/*
+    CONTEÚDO DA COMPETÊNCIA
+    =======================
+    Layout flexível com três colunas: comportamento pré, escala, comportamento pós.
+*/
+.competencia-content {
+    display: flex;                  /* Layout flexível */
+    min-height: 80px;               /* Altura mínima */
+}
+
+/*
+    COMPORTAMENTO PRÉ-AVALIAÇÃO
+    ===========================
+    Descrição do comportamento antes da avaliação.
+*/
+.comportamento-pre {
+    flex: 1;                        /* Ocupa espaço disponível */
+    padding: 10px;                  /* Espaçamento interno */
+    border-right: 1px solid #000;   /* Linha separadora à direita */
+    font-size: 11px;                /* Fonte pequena */
+    background: #fff;               /* Fundo branco */
+}
+
+/*
+    CONTAINER DA ESCALA DE AVALIAÇÃO
+    ================================
+    Área central com escala numérica para avaliação.
+*/
+.escala-container {
+    width: 200px;                   /* Largura fixa */
+    display: flex;                  /* Layout flexível */
+    flex-direction: column;         /* Direção vertical */
+    justify-content: center;        /* Centralização vertical */
+    align-items: center;            /* Centralização horizontal */
+    border-right: 1px solid #000;   /* Linha separadora à direita */
+    background: #f5f5f5;            /* Fundo cinza claro */
+}
+
+/*
+    LABELS DA ESCALA
+    ================
+    Textos descritivos da escala (ex: "Insatisfatório", "Excelente").
+*/
+.escala-labels {
+    display: flex;                  /* Layout flexível */
+    justify-content: space-between; /* Distribuição uniforme */
+    width: 100%;                    /* Largura total */
+    padding: 5px 10px;              /* Espaçamento interno */
+    font-size: 10px;                /* Fonte muito pequena */
+    font-weight: bold;              /* Texto em negrito */
+}
+
+/*
+    NÚMEROS DA ESCALA
+    =================
+    Radio buttons com números para seleção da nota.
+*/
+.escala-numeros {
+    display: flex;                  /* Layout flexível */
+    justify-content: space-between; /* Distribuição uniforme */
+    width: 100%;                    /* Largura total */
+    padding: 5px 10px;              /* Espaçamento interno */
+    margin: 5px 0;                  /* Margem vertical */
+}
+
+/* Radio buttons da escala */
+.escala-numeros input[type="radio"] {
+    margin: 0 2px;                  /* Margem horizontal */
+    transform: scale(1.2);          /* Aumenta tamanho do radio */
+}
+
+/* Labels dos números */
+.escala-numeros label {
+    font-size: 11px;                /* Fonte pequena */
+    font-weight: bold;              /* Texto em negrito */
+    margin: 0 2px;                  /* Margem horizontal */
+}
+
+/*
+    COMPORTAMENTO PÓS-AVALIAÇÃO
+    ===========================
+    Descrição do comportamento após a avaliação.
+*/
+.comportamento-pos {
+    flex: 1;                        /* Ocupa espaço disponível */
+    padding: 10px;                  /* Espaçamento interno */
+    font-size: 11px;                /* Fonte pequena */
+    background: #fff;               /* Fundo branco */
+}
+
+/* ===================================================
+   ESTILOS PARA SEÇÃO DE FEEDBACK
+   =================================================== */
+
+/*
+    SEÇÃO DE FEEDBACK GERAL
+    =======================
+    Área para comentários e observações sobre a avaliação.
+*/
+.feedback-section {
+    margin-top: 20px;               /* Espaço acima */
+    border: 1px solid #000;         /* Borda delimitadora */
+    padding: 15px;                  /* Espaçamento interno */
+}
+
+/*
+    TÍTULO DA SEÇÃO DE FEEDBACK
+    ===========================
+    Cabeçalho destacado para a seção.
+*/
+.feedback-title {
+    font-weight: bold;              /* Texto em negrito */
+    margin-bottom: 10px;            /* Espaço abaixo */
+    text-align: center;             /* Centralização */
+    background: #e0e0e0;            /* Fundo cinza */
+    padding: 5px;                   /* Espaçamento interno */
+    margin: -15px -15px 15px -15px; /* Margem negativa para ocupar toda largura */
+}
+
+/*
+    ITEM INDIVIDUAL DE FEEDBACK
+    ===========================
+    Cada campo de feedback (pontos fortes, melhorias, etc.).
+*/
+.feedback-item {
+    margin-bottom: 15px;            /* Espaço abaixo */
+}
+
+/* Labels dos itens de feedback */
+.feedback-item label {
+    font-weight: bold;              /* Texto em negrito */
+    display: block;                 /* Display em bloco */
+    margin-bottom: 5px;             /* Espaço abaixo */
+}
+
+/* Textareas para feedback */
+.feedback-item textarea {
+    width: 100%;                    /* Largura total */
+    min-height: 60px;               /* Altura mínima */
+    border: 1px solid #000;         /* Borda preta */
+    padding: 5px;                   /* Espaçamento interno */
+    font-family: Arial, sans-serif; /* Fonte consistente */
+    font-size: 12px;                /* Tamanho da fonte */
+    resize: vertical;               /* Permite redimensionar apenas verticalmente */
+}
+
+/* ===================================================
+   ESTILOS PARA ASSINATURAS
+   =================================================== */
+
+/*
+    SEÇÃO DE ASSINATURAS
+    ====================
+    Área para assinaturas do avaliador e avaliado.
+*/
+.assinaturas {
+    margin-top: 20px;               /* Espaço acima */
+    display: flex;                  /* Layout flexível */
+    justify-content: space-between; /* Distribuição nas extremidades */
+    border-top: 2px solid #000;     /* Linha separadora superior */
+    padding-top: 15px;              /* Espaço acima do conteúdo */
+}
+
+/*
+    CAMPO INDIVIDUAL DE ASSINATURA
+    ==============================
+    Cada área de assinatura (avaliador, avaliado).
+*/
+.assinatura-campo {
+    width: 45%;                     /* Largura de cada campo */
+    text-align: center;             /* Centralização */
+}
+
+/*
+    LINHA PARA ASSINATURA
+    =====================
+    Linha onde a assinatura será feita.
+*/
+.assinatura-linha {
+    border-bottom: 1px solid #000;  /* Linha para assinatura */
+    height: 40px;                   /* Altura da área */
+    margin-bottom: 5px;             /* Espaço abaixo */
+}
+
+/*
+    LABEL DA ASSINATURA
+    ===================
+    Texto identificando o tipo de assinatura.
+*/
+.assinatura-label {
+    font-size: 11px;                /* Fonte pequena */
+    font-weight: bold;              /* Texto em negrito */
+}
+
+/* ===================================================
+   ESTILOS PARA BOTÕES DE AÇÃO
+   =================================================== */
+
+/*
+    SEÇÃO DE BOTÕES
+    ===============
+    Área com botões de ação (salvar, cancelar, etc.).
+*/
+.botoes-acao {
+    margin-top: 20px;               /* Espaço acima */
+    text-align: center;             /* Centralização */
+    padding: 15px;                  /* Espaçamento interno */
+    border-top: 2px solid #000;     /* Linha separadora superior */
+}
+
+/* ===================================================
+   ESTILOS ESPECÍFICOS PARA AVALIAÇÃO 360°
+   =================================================== */
+
+/*
+    TIPO DE AVALIAÇÃO 360°
+    ======================
+    Cabeçalho específico para identificar o tipo de avaliação 360°.
+*/
+.avaliacao360-tipo {
+    text-align: center;             /* Centralização */
+    font-weight: bold;              /* Texto em negrito */
+    font-size: 14px;                /* Tamanho médio */
+    margin-bottom: 15px;            /* Espaço abaixo */
+    padding: 8px;                   /* Espaçamento interno */
+    background: #e0e0e0;            /* Fundo cinza */
+    border: 1px solid #000;         /* Borda preta */
+}
+
+/*
+    COMPETÊNCIA SIMPLES (AVALIAÇÃO 360°)
+    ====================================
+    Layout simplificado para competências da avaliação 360°.
+*/
+.competencia-simples {
+    display: flex;                  /* Layout flexível */
+    align-items: center;            /* Alinhamento vertical central */
+    padding: 8px;                   /* Espaçamento interno */
+    border-bottom: 1px solid #ccc;  /* Linha separadora inferior */
+}
+
+/* Remove borda da última competência */
+.competencia-simples:last-child {
+    border-bottom: none;
+}
+
+/*
+    NOME DA COMPETÊNCIA (AVALIAÇÃO 360°)
+    ====================================
+    Texto da competência sendo avaliada.
+*/
+.competencia-nome {
+    flex: 1;                        /* Ocupa espaço disponível */
+    font-weight: bold;              /* Texto em negrito */
+    padding-right: 20px;            /* Espaço à direita */
+}
+
+/*
+    ESCALA SIMPLES
+    ==============
+    Escala de avaliação simplificada para avaliação 360°.
+*/
+.escala-simples {
+    display: flex;                  /* Layout flexível */
+    align-items: center;            /* Alinhamento vertical central */
+    gap: 10px;                      /* Espaço entre elementos */
+}
+
+/* Radio buttons da escala simples */
+.escala-simples input[type="radio"] {
+    margin: 0 2px;                  /* Margem horizontal */
+}
+
+/*
+    OPÇÃO "NÃO AVALIADO"
+    ====================
+    Checkbox para marcar competências não avaliadas.
+*/
+.nao-avaliado {
+    margin-left: 15px;              /* Espaço à esquerda */
+    display: flex;                  /* Layout flexível */
+    align-items: center;            /* Alinhamento vertical central */
+    gap: 5px;                       /* Espaço entre elementos */
+}
+
+/* ===================================================
+   ESTILOS PARA LAYOUT TABULAR (AVALIAÇÃO 360°)
+   =================================================== */
+
+/*
+    CONTAINER PRINCIPAL (VERSÃO TABULAR)
+    ====================================
+    Layout alternativo para formulários mais complexos.
+*/
+.container {
+    max-width: 800px;               /* Largura máxima */
+    margin: 0 auto;                 /* Centralização horizontal */
+    background: white;              /* Fundo branco */
+    border: 2px solid #000;         /* Borda preta forte */
+    padding: 20px;                  /* Espaçamento interno */
+    font-family: Arial, sans-serif; /* Fonte padrão */
+    font-size: 12px;                /* Tamanho base */
+    line-height: 1.4;               /* Espaçamento entre linhas */
+}
+
+/*
+    CABEÇALHO (VERSÃO TABULAR)
+    ==========================
+    Cabeçalho para layout tabular.
+*/
+.header {
+    text-align: center;             /* Centralização */
+    margin-bottom: 25px;            /* Espaço abaixo */
+    border-bottom: 2px solid #000;  /* Linha separadora */
+    padding-bottom: 15px;           /* Espaço antes da linha */
+}
+
+/* Títulos do cabeçalho */
+.header h1 {
+    font-size: 16px;                /* Tamanho grande */
+    font-weight: bold;              /* Texto em negrito */
+    text-transform: uppercase;      /* Letras maiúsculas */
+    margin-bottom: 5px;             /* Espaço abaixo */
+    color: white;                   /* Cor branca */
+}
+
+.header h2 {
+    font-size: 14px;                /* Tamanho médio */
+    font-weight: bold;              /* Texto em negrito */
+    margin-bottom: 0;               /* Sem espaço abaixo */
+    color: #000;                    /* Cor preta */
+}
+
+/*
+    SEÇÃO DE FORMULÁRIO
+    ===================
+    Seções organizadas do formulário.
+*/
+.form-section {
+    margin-bottom: 25px;            /* Espaço abaixo */
+    border: 1px solid #000;         /* Borda delimitadora */
+    padding: 15px;                  /* Espaçamento interno */
+}
+
+/*
+    LINHA DE FORMULÁRIO
+    ===================
+    Layout horizontal para campos relacionados.
+*/
+.form-row {
+    display: flex;                  /* Layout flexível */
+    gap: 20px;                      /* Espaço entre elementos */
+    margin-bottom: 15px;            /* Espaço abaixo */
+    align-items: flex-end;          /* Alinhamento na base */
+}
+
+/* Remove margem da última linha */
+.form-row:last-child {
+    margin-bottom: 0;
+}
+
+/*
+    GRUPO DE CAMPOS
+    ===============
+    Agrupamento de label e campo relacionado.
+*/
+.form-group {
+    flex: 1;                        /* Ocupa espaço disponível */
+    min-width: 150px;               /* Largura mínima */
+}
+
+/* Labels dos grupos */
+.form-group label {
+    display: block;                 /* Display em bloco */
+    font-weight: bold;              /* Texto em negrito */
+    margin-bottom: 5px;             /* Espaço abaixo */
+    color: #000;                    /* Cor preta */
+}
+
+/* Campos de entrada dos grupos */
+.form-group input,
+.form-group select {
+    width: 100%;                    /* Largura total */
+    border: none;                   /* Remove borda padrão */
+    border-bottom: 1px solid #000;  /* Linha inferior apenas */
+    background: transparent;        /* Fundo transparente */
+    padding: 5px 2px;               /* Espaçamento interno */
+    font-size: 12px;                /* Tamanho da fonte */
+    font-family: Arial, sans-serif; /* Fonte consistente */
+}
+
+/* Efeito focus nos campos */
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;                  /* Remove outline padrão */
+    border-bottom: 2px solid #000;  /* Linha mais grossa no focus */
+}
+
+/* ===================================================
+   ESTILOS PARA TABELAS DE AVALIAÇÃO
+   =================================================== */
+
+/*
+    TABELA DE AVALIAÇÃO
+    ===================
+    Layout tabular para competências e escalas.
+*/
+.evaluation-table {
+    margin-bottom: 25px;            /* Espaço abaixo */
+}
+
+/* Tabela propriamente dita */
+.evaluation-table table {
+    width: 100%;                    /* Largura total */
+    border-collapse: collapse;      /* Remove espaços entre bordas */
+    border: 2px solid #000;         /* Borda externa forte */
+    font-size: 12px;                /* Tamanho da fonte */
+}
+
+/* Células da tabela */
+.evaluation-table th,
+.evaluation-table td {
+    border: 1px solid #000;         /* Borda das células */
+    padding: 8px;                   /* Espaçamento interno */
+    text-align: center;             /* Centralização */
+    vertical-align: middle;         /* Alinhamento vertical central */
+}
+
+/* Cabeçalhos da tabela */
+.evaluation-table th {
+    background-color: #e0e0e0;      /* Fundo cinza */
+    font-weight: bold;              /* Texto em negrito */
+}
+
+/* Nome da competência na tabela (mais específico para evitar conflito) */
+.evaluation-table .competencia-nome {
+    text-align: left;               /* Alinhamento à esquerda */
+    font-weight: bold;              /* Texto em negrito */
+    padding-left: 10px;             /* Espaço à esquerda */
+    min-width: 200px;               /* Largura mínima */
+}
+
+/*
+    OPÇÕES DA ESCALA NA TABELA
+    ==========================
+    Radio buttons dentro das células da tabela.
+*/
+.escala-opcoes {
+    padding: 5px;                   /* Espaçamento interno */
+}
+
+/* Labels das opções */
+.escala-opcoes label {
+    display: inline-block;          /* Display inline-block */
+    margin: 0 3px;                  /* Margem horizontal */
+    font-weight: normal;            /* Peso normal da fonte */
+    cursor: pointer;                /* Cursor de clique */
+}
+
+/* Radio buttons das opções */
+.escala-opcoes input[type="radio"] {
+    margin-right: 2px;              /* Espaço à direita */
+    width: auto;                    /* Largura automática */
+    border: none;                   /* Remove borda */
+}
+
+/*
+    CHECKBOX "NÃO AVALIADO" NA TABELA
+    =================================
+    Checkbox para competências não avaliadas.
+*/
+.nao-avaliado {
+    text-align: center;             /* Centralização */
+    vertical-align: middle;         /* Alinhamento vertical central */
+}
+
+/* Checkbox não avaliado */
+.nao-avaliado input[type="checkbox"] {
+    width: auto;                    /* Largura automática */
+    border: none;                   /* Remove borda */
+    margin: 0;                      /* Remove margem */
+}
+
+/*
+    CABEÇALHO DE SEÇÃO NA TABELA
+    ============================
+    Linhas que agrupam competências por categoria.
+*/
+.secao-header {
+    background-color: #d0d0d0;      /* Fundo cinza mais escuro */
+    font-weight: bold;              /* Texto em negrito */
+}
+
+/* Células do cabeçalho de seção */
+.secao-header td {
+    text-align: center;             /* Centralização */
+    font-size: 13px;                /* Tamanho ligeiramente maior */
+    padding: 10px;                  /* Espaçamento interno maior */
+}
+
+/* ===================================================
+   ESTILOS PARA SEÇÃO DE FEEDBACK (VERSÃO TABULAR)
+   =================================================== */
+
+/*
+    SEÇÃO DE FEEDBACK (VERSÃO TABULAR)
+    ==================================
+    Layout de feedback para formulários tabulares.
+*/
+.feedback-section {
+    margin-bottom: 25px;            /* Espaço abaixo */
+    border: 1px solid #000;         /* Borda delimitadora */
+    padding: 15px;                  /* Espaçamento interno */
+}
+
+/* Título da seção de feedback */
+.feedback-section h3 {
+    font-size: 14px;                /* Tamanho médio */
+    font-weight: bold;              /* Texto em negrito */
+    margin-bottom: 15px;            /* Espaço abaixo */
+    text-align: center;             /* Centralização */
+    color: #000;                    /* Cor preta */
+}
+
+/* Textarea da seção de feedback */
+.feedback-section textarea {
+    width: 100%;                    /* Largura total */
+    border: 1px solid #000;         /* Borda preta */
+    padding: 8px;                   /* Espaçamento interno */
+    font-family: Arial, sans-serif; /* Fonte consistente */
+    font-size: 12px;                /* Tamanho da fonte */
+    resize: vertical;               /* Redimensionar apenas verticalmente */
+    min-height: 80px;               /* Altura mínima */
+}
+
+/* Efeito focus no textarea */
+.feedback-section textarea:focus {
+    outline: none;                  /* Remove outline padrão */
+    border: 2px solid #000;         /* Borda mais grossa no focus */
+}
+
+/* ===================================================
+   ESTILOS PARA AÇÕES DO FORMULÁRIO
+   =================================================== */
+
+/*
+    AÇÕES DO FORMULÁRIO
+    ===================
+    Área com botões de ação na parte inferior.
+*/
+.form-actions {
+    text-align: center;             /* Centralização */
+    margin-top: 25px;               /* Espaço acima */
+    padding-top: 15px;              /* Espaço interno acima */
+    border-top: 1px solid #000;     /* Linha separadora superior */
+}
+
+/*
+    BOTÕES PADRÃO
+    =============
+    Estilo base para todos os botões do sistema.
+*/
+.btn {
+    padding: 10px 25px;             /* Espaçamento interno */
+    margin: 0 10px;                 /* Margem horizontal */
+    border: 2px solid #000;         /* Borda preta */
+    background: #f0f0f0;            /* Fundo cinza claro */
+    color: #000;                    /* Texto preto */
+    font-size: 12px;                /* Tamanho da fonte */
+    font-weight: bold;              /* Texto em negrito */
+    cursor: pointer;                /* Cursor de clique */
+    text-decoration: none;          /* Remove sublinhado */
+    display: inline-block;          /* Display inline-block */
+    font-family: Arial, sans-serif; /* Fonte consistente */
+}
+
+/* Efeito hover nos botões */
+.btn:hover {
+    background: #e0e0e0;            /* Fundo mais escuro no hover */
+}
+
+/*
+    BOTÃO PRIMÁRIO
+    ==============
+    Botão de ação principal (salvar, enviar).
+*/
+.btn-primary {
+    background: #000;               /* Fundo preto */
+    color: #fff;                    /* Texto branco */
+}
+
+/* Efeito hover no botão primário */
+.btn-primary:hover {
+    background: #333;               /* Fundo cinza escuro no hover */
+}
+
+/*
+    BOTÃO SECUNDÁRIO
+    ================
+    Botão de ação secundária (cancelar, voltar).
+*/
+.btn-secondary {
+    background: #ccc;               /* Fundo cinza */
+    color: #000;                    /* Texto preto */
+}
+
+/* Efeito hover no botão secundário */
+.btn-secondary:hover {
+    background: #bbb;               /* Fundo mais escuro no hover */
+}
+
+/* ===================================================
+   ESTILOS PARA MENU DA PÁGINA INICIAL
+   =================================================== */
+
+/*
+    BOTÕES DO MENU PRINCIPAL
+    ========================
+    Estilo base para links e botões do menu da página inicial.
+    Aplicado tanto aos links <a> quanto ao botão <button> do dropdown.
+*/
+.menu a,
+.dropdown .btn-menu {
+    background-color: #007bff;      /* Azul tema UNIFAE */
+    color: white;                   /* Texto branco */
+    padding: 12px 24px;             /* Espaçamento interno */
+    text-decoration: none;          /* Remove sublinhado */
+    border-radius: 5px;             /* Bordas arredondadas */
+    transition: background-color 0.3s; /* Animação suave */
+    border: none;                   /* Remove borda padrão */
+    cursor: pointer;                /* Cursor de clique */
+    font-family: Arial, sans-serif; /* Fonte consistente */
+    font-size: 14px;                /* Tamanho da fonte */
+}
+
+/*
+    EFEITO HOVER NO MENU
+    ====================
+    Mudança de cor quando mouse passa sobre os botões.
+*/
+.menu a:hover,
+.dropdown:hover .btn-menu {
+    background-color: #0056b3;      /* Azul mais escuro */
+}
+
+/*
+    CONTAINER DO DROPDOWN
+    =====================
+    Posicionamento relativo para dropdown funcionar.
+*/
+.dropdown {
+    position: relative;             /* Posicionamento relativo */
+    display: inline-block;          /* Display inline-block */
+}
+
+/*
+    CONTEÚDO DO DROPDOWN
+    ====================
+    Caixa que aparece quando hover no botão dropdown.
+*/
+.dropdown-content {
+    display: none;                  /* Oculto por padrão */
+    position: absolute;             /* Posicionamento absoluto */
+    background-color: #f1f1f1;      /* Fundo cinza claro */
+    min-width: 260px;               /* Largura mínima */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* Sombra */
+    z-index: 1;                     /* Camada superior */
+    border-radius: 5px;             /* Bordas arredondadas */
+    overflow: hidden;               /* Oculta overflow */
+}
+
+/*
+    LINKS DENTRO DO DROPDOWN
+    ========================
+    Estilo específico para links internos do dropdown.
+*/
+.dropdown-content a {
+    color: black;                   /* Texto preto */
+    padding: 12px 16px;             /* Espaçamento interno */
+    text-decoration: none;          /* Remove sublinhado */
+    display: block;                 /* Display em bloco */
+    background-color: #f1f1f1;      /* Fundo da caixa */
+    text-align: left;               /* Alinhamento à esquerda */
+    border-radius: 0;               /* Links internos não arredondados */
+    width: 100%;                    /* Largura total */
+}
+
+/*
+    EFEITO HOVER NOS LINKS DO DROPDOWN
+    ==================================
+    Mudança de cor nos links internos.
+*/
+.dropdown-content a:hover {
+    background-color: #ddd;         /* Fundo mais escuro */
+}
+
+/*
+    EXIBIÇÃO DO DROPDOWN
+    ====================
+    Mostra dropdown quando mouse está sobre o container.
+*/
+.dropdown:hover .dropdown-content {
+    display: block;                 /* Exibe conteúdo */
+}
+
+/* ===================================================
+   MEDIA QUERIES - RESPONSIVIDADE E IMPRESSÃO
+   =================================================== */
+
+/*
+    ESTILOS PARA IMPRESSÃO
+    ======================
+    Otimizações para quando formulário é impresso.
+*/
+@media print {
+    /* Remove padding do body para aproveitar papel */
+    body {
+        padding: 0;                 /* Remove espaçamento */
+        font-size: 11px;            /* Fonte menor para impressão */
+    }
+    
+    /* Ajusta containers para impressão */
+    .formulario-container, .container {
+        border: 2px solid #000;     /* Mantém borda */
+        box-shadow: none;           /* Remove sombra */
+        max-width: none;            /* Remove limitação de largura */
+        margin: 0;                  /* Remove margem */
+    }
+    
+    /* Oculta botões na impressão */
+    .botoes-acao, .form-actions {
+        display: none;              /* Não imprime botões */
+    }
+    
+    /* Oculta todos os botões */
+    .btn {
+        display: none;              /* Não imprime botões */
+    }
+}
+
+/*
+    RESPONSIVIDADE PARA DISPOSITIVOS MÓVEIS
+    =======================================
+    Adaptações para telas menores (tablets e smartphones).
+*/
+@media (max-width: 768px) {
+    /* Ajusta container para mobile */
+    .container {
+        padding: 15px;              /* Menos padding */
+        margin: 10px;               /* Margem menor */
+    }
+    
+    /* Empilha campos em telas pequenas */
+    .form-row {
+        flex-direction: column;     /* Direção vertical */
+        gap: 10px;                  /* Espaço menor */
+    }
+    
+    /* Permite scroll horizontal em tabelas */
+    .evaluation-table {
+        overflow-x: auto;           /* Scroll horizontal */
+    }
+    
+    /* Define largura mínima para tabelas */
+    .evaluation-table table {
+        min-width: 600px;           /* Largura mínima */
+    }
+    
+    /* Ajusta espaçamento em escalas */
+    .escala-opcoes label {
+        margin: 0 1px;              /* Margem menor */
+        font-size: 11px;            /* Fonte menor */
+    }
+    
+    /* Empilha conteúdo de competências */
+    .competencia-content {
+        flex-direction: column;     /* Direção vertical */
+    }
+    
+    /* Ajusta container de escala para mobile */
+    .escala-container {
+        width: 100%;                /* Largura total */
+        padding: 10px;              /* Padding menor */
+    }
+    
+    /* Empilha assinaturas em mobile */
+    .assinaturas {
+        flex-direction: column;     /* Direção vertical */
+        gap: 20px;                  /* Espaço entre assinaturas */
+    }
+    
+    /* Assinatura ocupa largura total em mobile */
+    .assinatura-campo {
+        width: 100%;                /* Largura total */
+    }
+    
+    /* Reduz fonte em dados básicos */
+    .dados-basicos table {
+        font-size: 11px;            /* Fonte menor */
+    }
+}
+

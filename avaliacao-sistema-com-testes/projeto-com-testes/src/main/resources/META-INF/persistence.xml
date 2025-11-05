@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    PERSISTENCE.XML - CONFIGURAÇÃO JPA/HIBERNATE
+    =============================================
+    
+    Este arquivo configura a unidade de persistência JPA para o Sistema de Avaliação UNIFAE.
+    Define como o Hibernate (implementação JPA) se conecta ao banco MariaDB e gerencia
+    as entidades do sistema.
+    
+    FUNÇÃO NO SISTEMA:
+    - Configura conexão com banco de dados MariaDB
+    - Define mapeamento das entidades JPA
+    - Configura comportamento do Hibernate
+    - Estabelece pool de conexões
+    - Define estratégias de otimização
+    
+    RELACIONAMENTO COM OUTROS ARQUIVOS:
+    - JPAUtil.java: Usa esta configuração para criar EntityManagerFactory
+    - Entidades (entity/*.java): Classes listadas aqui são gerenciadas pelo JPA
+    - DAOs (dao/*.java): Usam EntityManager configurado aqui
+    - pom.xml: Dependências JPA/Hibernate definidas lá
+    - Banco MariaDB: Conecta na base 'unifae_med_app'
+-->
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence
+             https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+
+    <!-- 
+        UNIDADE DE PERSISTÊNCIA
+        =======================
+        Define um contexto de persistência com nome único.
+        RESOURCE_LOCAL: Transações gerenciadas pela aplicação (não pelo servidor)
+    -->
+    <persistence-unit name="unifae-med-pu" transaction-type="RESOURCE_LOCAL">
+        
+        <!-- 
+            PROVEDOR JPA
+            ============
+            Especifica o Hibernate como implementação JPA.
+            Hibernate é o ORM mais popular para Java.
+        -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        
+        <!-- 
+            ENTIDADES GERENCIADAS
+            =====================
+            Lista explícita de todas as classes de entidade que serão gerenciadas pelo JPA.
+            Cada classe representa uma tabela no banco de dados.
+            
+            ESTRUTURA DO MODELO DE DADOS:
+            - Usuario: Usuários do sistema (estudantes, professores, coordenadores)
+            - Questionario: Templates de avaliação (Mini CEX, Avaliação 360°)
+            - CompetenciaQuestionario: Competências avaliadas em cada questionário
+            - AvaliacaoPreenchida: Instâncias de avaliações respondidas
+            - RespostaItemAvaliacao: Respostas individuais para cada item
+            - Permissao: Controle de acesso e autorização
+            - Turma: Agrupamento de estudantes
+            - Disciplina: Matérias/disciplinas do curso
+            - LocalEvento: Locais onde ocorrem as avaliações
+        -->
+        <class>com.unifae.med.entity.Usuario</class>
+        <class>com.unifae.med.entity.Questionario</class>
+        <class>com.unifae.med.entity.CompetenciaQuestionario</class>
+        <class>com.unifae.med.entity.AvaliacaoPreenchida</class>
+        <class>com.unifae.med.entity.RespostaItemAvaliacao</class>
+        <class>com.unifae.med.entity.Permissao</class>
+        <class>com.unifae.med.entity.Turma</class>
+        <class>com.unifae.med.entity.Disciplina</class>
+        <class>com.unifae.med.entity.LocalEvento</class>
+        <class>com.unifae.med.entity.EventoAgenda</class>
+        <class>com.unifae.med.entity.TipoEvento</class>
+        <class>com.unifae.med.entity.StatusEvento</class>
+        
+        <properties>
+            <!-- 
+                CONFIGURAÇÃO DE CONEXÃO COM BANCO DE DADOS
+                ===========================================
+                Define como conectar ao MariaDB local.
+            -->
+            
+            <!-- Driver JDBC para MariaDB -->
+            <property name="jakarta.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver"/>
+            
+            <!-- 
+                URL de conexão com parâmetros importantes:
+                - localhost:3306: Servidor local na porta padrão
+                - unifae_med_app: Nome da base de dados
+                - useUnicode=true: Habilita suporte Unicode
+                - characterEncoding=UTF-8: Encoding para caracteres especiais
+                - serverTimezone: Fuso horário do servidor
+            -->
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mariadb://localhost:3306/unifae_med_app?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=America/Sao_Paulo"/>
+            
+            <!-- Credenciais de acesso (usuário root sem senha para desenvolvimento) -->
+            <property name="jakarta.persistence.jdbc.user" value="root"/>
+            <property name="jakarta.persistence.jdbc.password" value=""/>
+            
+            <!-- 
+                CONFIGURAÇÕES DO HIBERNATE
+                ===========================
+                Personaliza comportamento do ORM.
+            -->
+            
+            <!-- Dialeto específico para MariaDB (otimizações e SQL específico) -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MariaDBDialect"/>
+            
+            <!-- 
+                Estratégia de schema:
+                - validate: Apenas valida se schema existe (produção)
+                - create: Recria schema a cada inicialização
+                - update: Atualiza schema conforme necessário
+                - create-drop: Cria e remove schema
+            -->
+            <property name="hibernate.hbm2ddl.auto" value="validate"/>
+            
+            <!-- 
+                CONFIGURAÇÕES DE DEBUG E MONITORAMENTO
+                =======================================
+            -->
+            <property name="hibernate.show_sql" value="false"/>           <!-- Exibe SQL no console (false para produção) -->
+            <property name="hibernate.format_sql" value="true"/>          <!-- Formata SQL para legibilidade -->
+            <property name="hibernate.use_sql_comments" value="true"/>    <!-- Adiciona comentários ao SQL -->
+            
+            <!-- 
+                POOL DE CONEXÕES
+                ================
+                Gerencia conexões com banco para melhor performance.
+            -->
+            <property name="hibernate.connection.pool_size" value="10"/>  <!-- Máximo 10 conexões simultâneas -->
+            
+            <!-- 
+                CONFIGURAÇÕES DE ENCODING
+                ==========================
+                Garante suporte correto a caracteres especiais.
+            -->
+            <property name="hibernate.connection.characterEncoding" value="utf8"/>
+            <property name="hibernate.connection.useUnicode" value="true"/>
+            
+            <!-- 
+                CONFIGURAÇÕES DE TRANSAÇÃO E PERFORMANCE
+                =========================================
+                Otimizações para melhor desempenho e consistência.
+            -->
+            
+            <!-- Desabilita autocommit (transações explícitas) -->
+            <property name="hibernate.connection.autocommit" value="false"/>
+            
+            <!-- Contexto de sessão por thread (padrão para aplicações web) -->
+            <property name="hibernate.current_session_context_class" value="thread"/>
+            
+            <!-- 
+                OTIMIZAÇÕES DE BATCH
+                ====================
+                Agrupa operações para melhor performance.
+            -->
+            <property name="hibernate.jdbc.batch_size" value="20"/>           <!-- Agrupa até 20 operações -->
+            <property name="hibernate.order_inserts" value="true"/>           <!-- Ordena INSERTs para eficiência -->
+            <property name="hibernate.order_updates" value="true"/>           <!-- Ordena UPDATEs para eficiência -->
+            <property name="hibernate.jdbc.batch_versioned_data" value="true"/> <!-- Batch para dados versionados -->
+            
+            <!-- 
+                CONFIGURAÇÕES DE COMPATIBILIDADE
+                =================================
+                Evita problemas com diferentes versões de banco.
+            -->
+            <property name="hibernate.temp.use_jdbc_metadata_defaults" value="false"/>
+            <property name="hibernate.globally_quoted_identifiers" value="false"/>
+        </properties>
+    </persistence-unit>
+</persistence>
+
