@@ -95,7 +95,7 @@
             
             <!-- Credenciais de acesso (usuário root sem senha para desenvolvimento) -->
             <property name="jakarta.persistence.jdbc.user" value="root"/>
-            <property name="jakarta.persistence.jdbc.password" value=""/>
+            <property name="jakarta.persistence.jdbc.password" value="1234"/>
             
             <!-- 
                 CONFIGURAÇÕES DO HIBERNATE
