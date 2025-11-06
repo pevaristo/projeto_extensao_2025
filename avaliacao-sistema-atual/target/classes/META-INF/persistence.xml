@@ -91,11 +91,11 @@
                 - characterEncoding=UTF-8: Encoding para caracteres especiais
                 - serverTimezone: Fuso horário do servidor
             -->
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:mariadb://localhost:3306/unifae_med_app?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=America/Sao_Paulo"/>
+            <property name="jakarta.persistence.jdbc.url" value="${DB_URL}"/>
             
             <!-- Credenciais de acesso (usuário root sem senha para desenvolvimento) -->
-            <property name="jakarta.persistence.jdbc.user" value="root"/>
-            <property name="jakarta.persistence.jdbc.password" value="1234"/>
+            <property name="jakarta.persistence.jdbc.user" value="${DB_USER}"/>
+            <property name="jakarta.persistence.jdbc.password" value="${DB_PASS}"/>
             
             <!-- 
                 CONFIGURAÇÕES DO HIBERNATE
