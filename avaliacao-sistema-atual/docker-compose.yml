@@ -31,7 +31,7 @@ services:
     # Lembre-se de mudar o caminho do arquivo sql
     volumes:
       - ./01-script_estrutura_dados_banco_unifae.sql:/docker-entrypoint-initdb.d/01-script_estrutura_dados_banco_unifae.sql
-      - mariadb_data:/var/lib/mysql 
+      - mariadb_data:/var/lib/mysql
   
   adminer:
     image: adminer:latest
