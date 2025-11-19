@@ -23,13 +23,11 @@ services:
       MARIADB_USER: unifae_med_app
       MARIADB_PASSWORD: unifae_med_app
       MARIADB_ROOT_PASSWORD: unifae_med_app
-    #ports:
-    #  - "3307:3306"
-    # Qualquer arquivo *.sql neste diretório /docker-entrypoint-initdb.d/ será executado na primeira inicialização.
-    # Lembre-se de mudar o caminho do arquivo sql
     volumes:
       - ./01-script_estrutura_dados_banco_unifae.sql:/docker-entrypoint-initdb.d/01-script_estrutura_dados_banco_unifae.sql
       - mariadb_data:/var/lib/mysql
+    #ports:
+    #  - "3307:3306"
   
   adminer:
     image: adminer:latest
